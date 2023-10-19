@@ -43,6 +43,15 @@ const BlogList = styled.ul`
   justify-content: center;
   padding: 1em;
   gap: 1em;
+  font-size: 1.2em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em;
+  font-weight: 500;
+  background-color: rgb(157, 133, 118);
+  cursor: text;
+  transition: border-color 0.25s;
+  position: relative;
 `;
 
 export default function HomePage() {

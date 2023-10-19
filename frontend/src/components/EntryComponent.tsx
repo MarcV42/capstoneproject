@@ -13,22 +13,22 @@ const Container = styled.li`
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding: 1em;
+  padding: 2em;
   position: relative;
-  gap: 0.5em;
+  gap: 0.4em;
 `;
 
 const Title = styled.h2`
-  font-size: 2em;
+  font-size: 1.8em;
   align-self: center;
-  color: #f7c297
+  color: #e8a06d
 `;
 
 const EntryDate = styled.small`
   align-self: flex-start;
   position: absolute;
-  top: 0.4em;
-  left: 0.4em;
+  bottom: 1.2em;
+  right: 0.6em;
   font-size: 0.8em;
   color: #90d2d8
 `;
@@ -51,7 +51,7 @@ const Button = styled.button`
   position: relative;
   align-self: end;
   padding: 0;
-  background-color: #F26938;
+  background-color: rgb(3, 166, 90);
   border: none;
   cursor: pointer;
   width: 100%;
