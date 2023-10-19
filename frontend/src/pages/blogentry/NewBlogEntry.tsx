@@ -68,13 +68,15 @@ width: 2.4em;
 `;
 
 const SubmitButton = styled.button`
-  border-radius: 10px;
-  padding: 0.6em;
-  background-color: #90d2d8;
+  border-radius: 8px;
+  padding: 0.8em;
+  font-size: 2em;
+  background-color: #03A65A;
   border: none;
-  cursor: pointer;
+  font-weight: 500;
+  cursor: grab;
   width: 100%;
-  font-size: 1.6em;
+  
 `;
 
 export default function NewBlogEntry() {

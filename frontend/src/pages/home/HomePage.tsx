@@ -28,6 +28,7 @@ const NewEntryButton = styled.button`
 `;
 
 const AddButtonIcon = styled.img`
+  color: aqua;
   width: 1.6em;
   position: absolute;
   top: 0.2em;
@@ -41,7 +42,7 @@ const BlogList = styled.ul`
   align-content: center;
   justify-content: center;
   padding: 1em;
-  gap: 2em;
+  gap: 1em;
 `;
 
 export default function HomePage() {
