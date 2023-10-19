@@ -92,10 +92,12 @@ export default function HomePage() {
             </NewEntryButton>
             <SortingComponent entries={entries} setEntries={setEntries}/>
             <BlogList>{entries.map((entry) => {
-                return <>
+
+        return (
+            <>
                     <EntryComponent key={entry.id} blogEntry={entry}/>
                 </>
-            })
+        )})
             }
             </BlogList>
             </Main>

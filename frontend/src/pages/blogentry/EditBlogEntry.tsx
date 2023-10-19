@@ -139,6 +139,7 @@ export default function EditBlogEntry() {
                     content: blogentry.content,
                     hashtags: mytags,
                     timeCreated: formattedDate,
+                    author: blogentry.author,
                 };
             axios
                 .put("/api/blogs/" + id, changedBlogEntry)
