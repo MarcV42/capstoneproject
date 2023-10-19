@@ -15,11 +15,27 @@ const Main = styled.main`
 `;
 
 const TitleInput = styled.input`
-  font-size: 1.4em;
+  font-size: 1.9em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em;
+  font-weight: 500;
+  background-color: rgba(64, 164, 152, 0.88);
+  cursor: text;
+  transition: border-color 0.25s;
+  position: relative;
 `;
 
 const ContentTextarea = styled.textarea`
   font-size: 1.2em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em;
+  font-weight: 500;
+  background-color: rgb(157, 133, 118);
+  cursor: text;
+  transition: border-color 0.25s;
+  position: relative;
 `;
 
 const TagsTitle = styled.span`
@@ -30,6 +46,16 @@ const TagContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4em;
+  font-size: 1.2em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em;
+  font-weight: 500;
+  background-color: rgba(45, 51, 50, 0.71);
+  cursor: text;
+  transition: border-color 0.25s;
+  position: relative;
+\`                                               
 `;
 
 const SingleTag = styled.div`
