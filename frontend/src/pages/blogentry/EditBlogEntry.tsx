@@ -77,7 +77,7 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   border-radius: 10px;
   padding: 0.6em;
-  background-color: #90d2d8;
+  background-color: #F26938;
   border: none;
   cursor: pointer;
   width: 100%;

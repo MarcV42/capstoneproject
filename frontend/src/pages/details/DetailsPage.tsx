@@ -26,7 +26,7 @@ const ReturnButtonImage = styled.img`
 `;
 
 const Container = styled.div`
-  border: 0.4em #ffecb8 solid;
+  border: 0.4em #F288A4 solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;

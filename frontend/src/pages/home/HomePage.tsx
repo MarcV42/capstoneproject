@@ -21,7 +21,7 @@ const NewEntryButton = styled.button`
   padding: 0.4em;
   font-size: 2em;
   font-weight: 500;
-  background-color: #f7c297;
+  background-color: #03A65A;
   cursor: pointer;
   transition: border-color 0.25s;
   position: relative;
