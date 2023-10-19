@@ -70,7 +70,7 @@ width: 2.4em;
 const SubmitButton = styled.button`
   border-radius: 10px;
   padding: 0.6em;
-  background-color: #F26938;
+  background-color: #90d2d8;
   border: none;
   cursor: pointer;
   width: 100%;

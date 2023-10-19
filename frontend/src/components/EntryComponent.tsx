@@ -8,14 +8,14 @@ export type props = {
 }
 
 const Container = styled.li`
-  border: 0.4em #ffecb8 solid;
+  border: 0.4em #7e5c44 solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-content: center;
   padding: 1em;
   position: relative;
-  gap: 0.4em;
+  gap: 0.5em;
 `;
 
 const Title = styled.h2`
