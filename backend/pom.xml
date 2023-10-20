@@ -56,7 +56,7 @@
     </dependencies>
 
     <build>
-        <finalName>BlogApp</finalName>
+        <finalName>CapstoneBlog</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
