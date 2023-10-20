@@ -65,7 +65,7 @@ jobs:
         with:
           push: true
           #Set dockerhub project
-          tags: archfoxgate/deletemelater:latest
+          tags: marcvvvvvvvv/capstoneblog:latest
           context: .
   deploy-to-render:
     runs-on: ubuntu-latest
