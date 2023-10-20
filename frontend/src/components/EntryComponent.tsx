@@ -21,7 +21,7 @@ const Container = styled.li`
 const Title = styled.h2`
   font-size: 1.8em;
   align-self: center;
-  color: #e7a170
+  color: #eaa176
 `;
 
 const EntryDate = styled.small`
