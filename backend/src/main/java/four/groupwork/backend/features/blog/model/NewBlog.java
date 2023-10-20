@@ -12,4 +12,5 @@ public class NewBlog
     private String content;
 
     private List<String> hashtags;
+  //  private String author;
 }

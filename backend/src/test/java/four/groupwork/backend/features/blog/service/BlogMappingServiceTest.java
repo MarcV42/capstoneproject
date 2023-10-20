@@ -25,6 +25,7 @@ class BlogMappingServiceTest
         blogEntry.setContent("content");
         blogEntry.setHashtags(List.of("hashtag1", "hashtag2"));
         blogEntry.setTimeCreated(Instant.now());
+        blogEntry.setAuthor("MarcV42");
 
         // WHEN
         BlogResponse actual = blogMappingService.mapBlogToResponse(blogEntry);
@@ -34,6 +35,7 @@ class BlogMappingServiceTest
         assert actual.content().equals("content");
         assert actual.hashtags().equals(List.of("hashtag1", "hashtag2"));
         assert actual.timeCreated() != null;
+        assert actual.author().equals("MarcV42");
     }
 
     @Test
@@ -44,6 +46,7 @@ class BlogMappingServiceTest
         newBlog.setTitle("title");
         newBlog.setContent("content");
         newBlog.setHashtags(List.of("hashtag1", "hashtag2"));
+       // newBlog.setAuthor("MarcV42");
         // WHEN
         BlogEntry actual = blogMappingService.mapNewBlogToBlogEntry(newBlog);
         // Assert
@@ -51,5 +54,6 @@ class BlogMappingServiceTest
         assert actual.getContent().equals("content");
         assert actual.getHashtags().equals(List.of("hashtag1", "hashtag2"));
         assert actual.getTimeCreated() != null;
+
     }
 }
