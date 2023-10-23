@@ -39,7 +39,11 @@ const ContentTextarea = styled.textarea`
 `;
 
 const TagsTitle = styled.span`
-  font-size: 1.2em;
+  font-size: 0.9em;
+  background-color: rgba(45, 51, 50, 0.71);
+  padding: 0.4em;
+  border-radius: 8px;
+  border: 1px solid transparent;
 `;
 
 const TagContainer = styled.div`
@@ -150,12 +154,12 @@ export default function NewBlogEntry() {
     return <>
         <AppHeader headerText="New Blog"/>
         <Main>
-            <TitleInput type="text" placeholder="What I love to eat" value={title}
+            <TitleInput type="text" placeholder="What's on my mind right now" value={title}
                         onChange={(event) => setTitle(event.target.value)}></TitleInput>
-            <ContentTextarea rows={10} placeholder={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr."}
+            <ContentTextarea rows={15} placeholder={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr."}
                              value={text}
                              onChange={(event) => setText(event.target.value)}></ContentTextarea>
-            <TagsTitle>Tags:</TagsTitle>
+            <TagsTitle>Enter Hashtags:</TagsTitle>
             <TagContainer>
                 {tags && tags.map((tag, index) => (
                     <SingleTag key={index}>
