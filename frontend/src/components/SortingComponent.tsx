@@ -17,7 +17,7 @@ const Container = styled.div`
   gap: 0.4em;
   border-radius: 8px;
   border: 1px solid transparent;
-  background-color: #F2CB05;
+  background-color: #733f34;
   padding: 0.4em;
   position: relative;
 `;

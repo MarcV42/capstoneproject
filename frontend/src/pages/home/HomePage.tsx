@@ -12,27 +12,27 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   padding: 0.4em;
-  gap: 0.6em;
+  gap: 0.59em;
 `;
 
 const NewEntryButton = styled.button`
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.4em;
-  font-size: 2em;
+  font-size: 1.9em;
   font-weight: 500;
-  background-color: #03A65A;
+  background-color: #3e608c;
   cursor: pointer;
   transition: border-color 0.25s;
   position: relative;
 `;
 
 const AddButtonIcon = styled.img`
-  color: aqua;
-  width: 1.6em;
+  color: #3e608c;
+  width: 1.4em;
   position: absolute;
   top: 0.2em;
-  left: 1.2em;
+  left: 1.5em;
 `
 
 const BlogList = styled.ul`
@@ -43,15 +43,16 @@ const BlogList = styled.ul`
   justify-content: center;
   padding: 1em;
   gap: 1em;
-  font-size: 1.2em;
+  font-size: 1.1em;
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.4em;
-  font-weight: 500;
-  background-color: rgb(157, 133, 118);
+  padding: 0.25em;
+  font-weight: 340;
+  background-color: rgb(166, 115, 96);
   cursor: text;
   transition: border-color 0.25s;
   position: relative;
+  
 `;
 
 export default function HomePage() {
@@ -92,9 +93,9 @@ export default function HomePage() {
         <>
             <AppHeader headerText="MyBlog App"/>
             <Main>
-                <p> Login stuff</p>
+                <p> Login </p>
                 <button onClick={login}> Log in</button>
-                <button onClick={whoAmI}> Who am I</button>
+                <button onClick={whoAmI}> Show my user ID</button>
 
 
             <NewEntryButton type="button" onClick={() => navigateTo("/newentry")}>

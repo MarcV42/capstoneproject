@@ -8,7 +8,7 @@ export type props = {
 }
 
 const Container = styled.li`
-  border: 0.4em #7e5c44 solid;
+  border: 0.4em #733f34 solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@ const Container = styled.li`
 const Title = styled.h2`
   font-size: 1.8em;
   align-self: center;
-  color: #eaa176
+  color: #f2f2f2
 `;
 
 const EntryDate = styled.small`
@@ -51,7 +51,7 @@ const Button = styled.button`
   position: relative;
   align-self: end;
   padding: 0;
-  background-color: rgb(3, 166, 90);
+  background-color: rgb(44, 59, 89);
   border: none;
   cursor: pointer;
   width: 100%;
