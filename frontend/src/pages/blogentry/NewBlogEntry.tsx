@@ -5,6 +5,8 @@ import {NewBlog, Tag} from "./model/model.ts";
 import styled from "styled-components";
 import AppHeader from "../../components/AppHeader.tsx";
 import AddSvg from "../../assets/plus-circle.svg"
+import MinusSvg from "../../assets/minus-circle.svg";
+
 
 const Main = styled.main`
   display: flex;
@@ -65,7 +67,7 @@ const TagContainer = styled.div`
 const SingleTag = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-content: center;
   gap: 0.4em;
 `;
@@ -149,6 +151,13 @@ export default function NewBlogEntry() {
                 console.error("Fehler beim Speichern:", error);
             });
     }
+    const removeTag = (index: number) => {
+        if (tags.length > 1) {
+            const newTags = [...tags];
+            newTags.splice(index, 1);
+            setTags(newTags);
+        }
+    };
 
 
     return <>
@@ -171,10 +180,14 @@ export default function NewBlogEntry() {
                             onChange={(event) => changeTagName(index, event.target.value)}
                         />
                         <TagButton type="button" onClick={() => addNewTag()}>
-                            <ButtonImage src={AddSvg} alt="Add Icon"/>
+                            <ButtonImage src={AddSvg} alt="Add Icon" />
                         </TagButton>
+                        <button type="button" onClick={() => removeTag(index)}>
+                            <ButtonImage src={MinusSvg} alt="Minus Icon" />
+                        </button>
                     </SingleTag>
                 ))}
+
             </TagContainer>
             <SubmitButton onClick={handleOnSubmit}>Submit</SubmitButton>
         </Main>
