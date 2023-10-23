@@ -20,7 +20,7 @@ const TitleInput = styled.input`
   border: 1px solid transparent;
   padding: 0.4em;
   font-weight: 500;
-  background-color: rgba(64, 164, 152, 0.88);
+  background-color: rgb(166, 115, 96);
   cursor: text;
   transition: border-color 0.25s;
   position: relative;
@@ -97,7 +97,7 @@ const SubmitButton = styled.button`
   border-radius: 8px;
   padding: 0.8em;
   font-size: 2em;
-  background-color: #03A65A;
+  background-color: #3E608C;
   border: none;
   font-weight: 500;
   cursor: grab;
@@ -137,7 +137,7 @@ export default function NewBlogEntry() {
             .post("/api/blogs", newBlogEntry)
             .then((response) => {
 
-                console.log("Erfolgreich gespeichert:", response.data);
+             //   console.log("Erfolgreich gespeichert:", response.data);
             })
             .then(() => navigateTo("/"))
             .catch((error) => {

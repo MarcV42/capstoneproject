@@ -93,7 +93,7 @@ export default function HomePage() {
         <>
             <AppHeader headerText="MyBlog App"/>
             <Main>
-                <p> Login </p>
+                <p> This is the place to express and document your daily happenings </p>
                 <button onClick={login}> Log in</button>
                 <button onClick={whoAmI}> Show my user ID</button>
 
