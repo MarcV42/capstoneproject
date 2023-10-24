@@ -1,12 +1,12 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import EntryComponent from "../../components/EntryComponent.tsx";
 import SortingComponent from "../../components/SortingComponent.tsx";
 import axios from "axios";
-import {useEffect, useState} from "react";
-import {BlogEntry} from "../../model/BlogEntryModel.tsx";
+import { useEffect, useState } from "react";
+import { BlogEntry } from "../../model/BlogEntryModel.tsx";
 import AppHeader from "../../components/AppHeader.tsx";
 import styled from "styled-components";
-import AddIcon from "../../assets/plus-circle.svg"
+import AddIcon from "../../assets/plus-circle.svg";
 
 const Main = styled.main`
   display: flex;
@@ -33,7 +33,7 @@ const AddButtonIcon = styled.img`
   position: absolute;
   top: 0.2em;
   left: 1.5em;
-`
+`;
 
 const BlogList = styled.ul`
   list-style: none;
@@ -52,22 +52,21 @@ const BlogList = styled.ul`
   cursor: text;
   transition: border-color 0.25s;
   position: relative;
-  
 `;
 
 export default function HomePage() {
     const [entries, setEntries] = useState<BlogEntry[]>([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Zustand für den Anmeldestatus
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigateTo = useNavigate();
 
     const fetchEntries = () => {
         axios
-            .get("/api/blogs")
+            .get('/api/blogs')
             .then((response) => {
                 setEntries(response.data);
             })
             .catch((error) => {
-                console.error("Error found", error);
+                console.error('Error found', error);
             });
     };
 
@@ -77,33 +76,50 @@ export default function HomePage() {
 
     const login = () => {
         const host =
-            window.location.host === "localhost:5173"
-                ? "http://localhost:8080"
+            window.location.host === 'localhost:5173'
+                ? 'http://localhost:8080'
                 : window.location.origin;
 
         // Assuming this is where you handle the login process
-        window.open(host + "/oauth2/authorization/github");
+        window.open(host + '/oauth2/authorization/github');
 
         // Once the login is successful, call handleLoginSuccess
         handleLoginSuccess();
     };
 
-
     const whoAmI = () => {
         axios
-            .get("/api/user")
+            .get('/api/user')
             .then((response) => {
                 console.log(response.data);
             })
             .catch((error) => {
-                console.error("Error found", error);
+                console.error('Error found', error);
             });
     };
 
-    // Funktion, um den Anmeldestatus festzulegen
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
     };
+
+    const logout = () => {
+        // Define the 'host' variable here
+        const host =
+            window.location.host === 'localhost:5173'
+                ? 'http://localhost:8080'
+                : window.location.origin;
+
+        // Close the OAuth2 popup window (replace 'oauthPopup' with the actual window name).
+        const oauthPopup = window.open(host + '/oauth2/authorization/github');
+        if (oauthPopup) {
+            oauthPopup.close();
+        }
+
+        // Redirect to the login page or any other appropriate action.
+        navigateTo('/');
+    };
+
+
 
     return (
         <>
@@ -112,24 +128,18 @@ export default function HomePage() {
                 <p> This is the place to express and document your daily happenings </p>
                 <button onClick={login}> Log in</button>
                 <button onClick={whoAmI}> Show my user ID</button>
-
                 {isLoggedIn && <p>You are logged in successfully!</p>}
-
-                <NewEntryButton type="button" onClick={() => navigateTo("/newentry")}>
-                    <AddButtonIcon src={AddIcon} alt="Add Icon"/>New Entry
+                {isLoggedIn && <button onClick={logout}>Logout</button>}
+                <NewEntryButton type="button" onClick={() => navigateTo('/newentry')}>
+                    <AddButtonIcon src={AddIcon} alt="Add Icon" />New Entry
                 </NewEntryButton>
-                <SortingComponent entries={entries} setEntries={setEntries}/>
-                <BlogList>{entries.map((entry) => {
-
-                    return (
-                        <>
-                            <EntryComponent key={entry.id} blogEntry={entry}/>
-                        </>
-                    )})
-                }
+                <SortingComponent entries={entries} setEntries={setEntries} />
+                <BlogList>
+                    {entries.map((entry) => {
+                        return <EntryComponent key={entry.id} blogEntry={entry} />;
+                    })}
                 </BlogList>
             </Main>
         </>
     );
 }
-
