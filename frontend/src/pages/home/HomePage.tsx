@@ -57,61 +57,79 @@ const BlogList = styled.ul`
 
 export default function HomePage() {
     const [entries, setEntries] = useState<BlogEntry[]>([]);
-    const navigateTo = useNavigate()
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Zustand für den Anmeldestatus
+    const navigateTo = useNavigate();
+
     const fetchEntries = () => {
-        axios.get("/api/blogs")
+        axios
+            .get("/api/blogs")
             .then((response) => {
-                setEntries(response.data)
+                setEntries(response.data);
             })
             .catch((error) => {
                 console.error("Error found", error);
-            })
+            });
     };
+
     useEffect(() => {
         fetchEntries();
-    }, [])
+    }, []);
 
-    function login() {
-        const host = window.location.host === 'localhost:5173' ?
-            'http://localhost:8080': window.location.origin
+    const login = () => {
+        const host =
+            window.location.host === "localhost:5173"
+                ? "http://localhost:8080"
+                : window.location.origin;
 
-        window.open(host + '/oauth2/authorization/github' )
-    }
+        // Assuming this is where you handle the login process
+        window.open(host + "/oauth2/authorization/github");
 
-    function whoAmI()
-    {
-        axios.get("/api/user")
+        // Once the login is successful, call handleLoginSuccess
+        handleLoginSuccess();
+    };
+
+
+    const whoAmI = () => {
+        axios
+            .get("/api/user")
             .then((response) => {
-                console.log(response.data)
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error("Error found", error);
-            })
-    }
+            });
+    };
+
+    // Funktion, um den Anmeldestatus festzulegen
+    const handleLoginSuccess = () => {
+        setIsLoggedIn(true);
+    };
 
     return (
         <>
-            <AppHeader headerText="MyBlog App"/>
+            <AppHeader headerText="MyBlog App" />
             <Main>
                 <p> This is the place to express and document your daily happenings </p>
                 <button onClick={login}> Log in</button>
                 <button onClick={whoAmI}> Show my user ID</button>
 
+                {isLoggedIn && <p>You are logged in successfully!</p>}
 
-            <NewEntryButton type="button" onClick={() => navigateTo("/newentry")}>
-                <AddButtonIcon src={AddIcon} alt="Add Icon"/>New Entry
-            </NewEntryButton>
-            <SortingComponent entries={entries} setEntries={setEntries}/>
-            <BlogList>{entries.map((entry) => {
+                <NewEntryButton type="button" onClick={() => navigateTo("/newentry")}>
+                    <AddButtonIcon src={AddIcon} alt="Add Icon"/>New Entry
+                </NewEntryButton>
+                <SortingComponent entries={entries} setEntries={setEntries}/>
+                <BlogList>{entries.map((entry) => {
 
-        return (
-            <>
-                    <EntryComponent key={entry.id} blogEntry={entry}/>
-                </>
-        )})
-            }
-            </BlogList>
+                    return (
+                        <>
+                            <EntryComponent key={entry.id} blogEntry={entry}/>
+                        </>
+                    )})
+                }
+                </BlogList>
             </Main>
         </>
-    )
+    );
 }
+
