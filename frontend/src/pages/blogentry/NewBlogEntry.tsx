@@ -159,6 +159,12 @@ export default function NewBlogEntry() {
         }
     };
 
+    const insertTag = (index: number) => {
+        const newTags = [...tags];
+        newTags.splice(index + 1, 0, { name: '' }); // Fügt ein leeres Tag nach dem aktuellen Index hinzu
+        setTags(newTags);
+    };
+
 
     return <>
         <AppHeader headerText="New Blog"/>
@@ -179,11 +185,12 @@ export default function NewBlogEntry() {
                             placeholder={"#HashTag"}
                             onChange={(event) => changeTagName(index, event.target.value)}
                         />
-                        <TagButton type="button" onClick={() => addNewTag()}>
-                            <ButtonImage src={AddSvg} alt="Add Icon" />
-                        </TagButton>
+
                         <TagButton type="button" onClick={() => removeTag(index)}>
                             <ButtonImage src={MinusSvg} alt="Minus Icon" />
+                        </TagButton>
+                        <TagButton type="button" onClick={() => insertTag(index)}>
+                            <ButtonImage src={AddSvg} alt="Plus Icon" />
                         </TagButton>
                     </SingleTag>
                 ))}
