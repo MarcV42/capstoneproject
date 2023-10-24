@@ -182,9 +182,9 @@ export default function NewBlogEntry() {
                         <TagButton type="button" onClick={() => addNewTag()}>
                             <ButtonImage src={AddSvg} alt="Add Icon" />
                         </TagButton>
-                        <button type="button" onClick={() => removeTag(index)}>
+                        <TagButton type="button" onClick={() => removeTag(index)}>
                             <ButtonImage src={MinusSvg} alt="Minus Icon" />
-                        </button>
+                        </TagButton>
                     </SingleTag>
                 ))}
 
