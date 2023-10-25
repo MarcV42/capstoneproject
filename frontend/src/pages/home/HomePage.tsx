@@ -7,6 +7,8 @@ import { BlogEntry } from "../../model/BlogEntryModel.tsx";
 import AppHeader from "../../components/AppHeader.tsx";
 import styled from "styled-components";
 import AddIcon from "../../assets/plus-circle.svg";
+import { saveAs } from 'file-saver';
+import ExcelJS from 'exceljs';
 
 const Main = styled.main`
   display: flex;
@@ -87,6 +89,7 @@ export default function HomePage() {
         handleLoginSuccess();
     };
 
+
     const whoAmI = () => {
         axios
             .get('/api/user')
@@ -109,17 +112,47 @@ export default function HomePage() {
                 ? 'http://localhost:8080'
                 : window.location.origin;
 
+        // Öffne die GitHub-Logout-URL, um die OAuth-Sitzung zu beenden.
+         window.location.href = 'https://github.com/logout';
+        document.cookie = 'sessionCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=None; Secure';
+
         // Close the OAuth2 popup window (replace 'oauthPopup' with the actual window name).
         const oauthPopup = window.open(host + '/oauth2/authorization/github');
         if (oauthPopup) {
             oauthPopup.close();
         }
-
-        // Redirect to the login page or any other appropriate action.
+        setIsLoggedIn(false);
+        // Nach dem Logout kannst du zur Startseite oder einer anderen geeigneten Seite umleiten.
         navigateTo('/');
     };
 
 
+
+    // function ExcelExport(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    // Diese Funktion erstellt und exportiert die Excel-Datei
+    const ExcelExport = () => {
+        // Erstelle ein neues Excel-Arbeitsbuch
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Daten');
+
+        // Überschriften hinzufügen
+        worksheet.addRow(['Author', 'Title', 'Content', 'Hashtags', 'Entry Time']);
+
+        // Daten aus der Datenbank in Excel einfügen
+        entries.forEach((entry) => {
+            worksheet.addRow([entry.author, entry.title, entry.content, entry.hashtags, entry.timeCreated]);
+        });
+
+        // Die Excel-Datei als Blob speichern
+        workbook.xlsx.writeBuffer().then((data) => {
+            const blob = new Blob([data], {
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            });
+
+            // Die Excel-Datei herunterladen
+            saveAs(blob, 'export.xlsx');
+        });
+    };
 
     return (
         <>
@@ -133,6 +166,7 @@ export default function HomePage() {
                 <NewEntryButton type="button" onClick={() => navigateTo('/newentry')}>
                     <AddButtonIcon src={AddIcon} alt="Add Icon" />New Entry
                 </NewEntryButton>
+                <button onClick={ExcelExport}> Export Excel-File</button>
                 <SortingComponent entries={entries} setEntries={setEntries} />
                 <BlogList>
                     {entries.map((entry) => {
