@@ -87,6 +87,7 @@ export default function HomePage() {
         handleLoginSuccess();
     };
 
+
     const whoAmI = () => {
         axios
             .get('/api/user')
@@ -109,13 +110,17 @@ export default function HomePage() {
                 ? 'http://localhost:8080'
                 : window.location.origin;
 
+        // Öffne die GitHub-Logout-URL, um die OAuth-Sitzung zu beenden.
+         window.location.href = 'https://github.com/logout';
+        document.cookie = 'sessionCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=None; Secure';
+
         // Close the OAuth2 popup window (replace 'oauthPopup' with the actual window name).
         const oauthPopup = window.open(host + '/oauth2/authorization/github');
         if (oauthPopup) {
             oauthPopup.close();
         }
-
-        // Redirect to the login page or any other appropriate action.
+        setIsLoggedIn(false);
+        // Nach dem Logout kannst du zur Startseite oder einer anderen geeigneten Seite umleiten.
         navigateTo('/');
     };
 
@@ -140,6 +145,8 @@ export default function HomePage() {
                     })}
                 </BlogList>
             </Main>
+
+
         </>
     );
 }
