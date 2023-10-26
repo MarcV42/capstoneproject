@@ -117,9 +117,6 @@ export default function NewBlogEntry() {
     const [text, setText,] = useState("")
     const [tags, setTags,] = useState<Tag[]>([{name: ""}])
 
-    const addNewTag = () => {
-        setTags([...tags, {name: ""}]);
-    };
 
     const changeTagName = (index: number, name: string) => {
         const newTags = [...tags];
@@ -141,7 +138,7 @@ export default function NewBlogEntry() {
             };
         axios
             .post("/api/blogs", newBlogEntry)
-            .then((response) => {
+            .then(() => {
 
              //   console.log("Erfolgreich gespeichert:", response.data);
             })
