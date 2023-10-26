@@ -4,7 +4,6 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import AppHeader from "../../components/AppHeader.tsx";
 import styled from "styled-components";
-import AddSvg from "../../assets/plus-circle.svg";
 import MinusSvg from "../../assets/minus-circle.svg";
 
 const EditForm = styled.form`
@@ -108,10 +107,6 @@ export default function EditBlogEntry() {
         fetchBlog().then();
     }, [id]);
 
-    const addNewTag = () => {
-        if (blogentry)
-            setBlogentry({...blogentry, hashtags: [...blogentry.hashtags, ""]});
-    };
 
 
     const deleteTag = (index: number) => {
@@ -150,6 +145,7 @@ export default function EditBlogEntry() {
         }
     }
 
+
     if (loading) return <div>Loading...</div>
     if (error) return <div>Something went wrong</div>
 
@@ -187,9 +183,7 @@ export default function EditBlogEntry() {
                                     })}
                                 />
 
-                                <TagButton type={"button"} onClick={addNewTag}>
-                                    <ButtonImage src={AddSvg} alt="Add Icon"/>
-                                </TagButton>
+
                                 <TagButton type={"button"} onClick={() => deleteTag(index)}>
                                     <ButtonImage src={MinusSvg} alt="Reduce Icon"/>
                                 </TagButton>

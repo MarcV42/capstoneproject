@@ -58,7 +58,7 @@ const BlogList = styled.ul`
 
 export default function HomePage() {
     const [entries, setEntries] = useState<BlogEntry[]>([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
     const navigateTo = useNavigate();
 
     const fetchEntries = () => {
