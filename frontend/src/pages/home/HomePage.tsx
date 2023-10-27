@@ -59,6 +59,7 @@ const BlogList = styled.ul`
 export default function HomePage() {
     const [entries, setEntries] = useState<BlogEntry[]>([]);
     const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [userId, setUserId] = useState("");
     const navigateTo = useNavigate();
 
     const fetchEntries = () => {
@@ -94,7 +95,7 @@ export default function HomePage() {
         axios
             .get('/api/user')
             .then((response) => {
-                console.log(response.data);
+                setUserId(response.data); // Benutzer-ID in den State setzen
             })
             .catch((error) => {
                 console.error('Error found', error);
@@ -161,7 +162,7 @@ export default function HomePage() {
                 <p> This is the place to express and document your daily happenings </p>
                 <button onClick={login}> Log in</button>
                 <button onClick={whoAmI}> Show my user ID</button>
-                {isLoggedIn && <p>You are logged in successfully!</p>}
+                {isLoggedIn && <p>You are logged in successfully! {userId} (User ID)</p>} {/* Benutzer-ID anzeigen */}
                 {isLoggedIn && <button onClick={logout}>Logout</button>}
                 <NewEntryButton type="button" onClick={() => navigateTo('/newentry')}>
                     <AddButtonIcon src={AddIcon} alt="Add Icon" />New Entry
