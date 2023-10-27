@@ -114,7 +114,7 @@ export default function HomePage() {
                 : window.location.origin;
 
         // Öffne die GitHub-Logout-URL, um die OAuth-Sitzung zu beenden.
-         window.location.href = 'https://github.com/logout';
+        window.location.href = 'https://github.com/logout';
         document.cookie = 'sessionCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=None; Secure';
 
         // Close the OAuth2 popup window (replace 'oauthPopup' with the actual window name).
@@ -125,12 +125,9 @@ export default function HomePage() {
         setIsLoggedIn(false);
         // Nach dem Logout kannst du zur Startseite oder einer anderen geeigneten Seite umleiten.
         navigateTo('/');
-    };
-
-
+    }
 
     // function ExcelExport(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    // Diese Funktion erstellt und exportiert die Excel-Datei
     const ExcelExport = () => {
         // Erstelle ein neues Excel-Arbeitsbuch
         const workbook = new ExcelJS.Workbook();
@@ -153,7 +150,7 @@ export default function HomePage() {
             // Die Excel-Datei herunterladen
             saveAs(blob, 'export.xlsx');
         });
-    };
+    }
 
     return (
         <>
@@ -170,12 +167,11 @@ export default function HomePage() {
                 <button onClick={ExcelExport}> Export Excel-File</button>
                 <SortingComponent entries={entries} setEntries={setEntries} />
                 <BlogList>
-                    {entries.map((entry) => {
+                    {entries.slice().reverse().map((entry) => {
                         return <EntryComponent key={entry.id} blogEntry={entry} />;
                     })}
                 </BlogList>
             </Main>
         </>
     );
-
 }
