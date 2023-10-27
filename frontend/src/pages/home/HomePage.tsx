@@ -164,9 +164,7 @@ export default function HomePage() {
                     <AddButtonIcon src={AddIcon} alt="Add Icon" />New Entry
                 </NewEntryButton>
                 <button onClick={ExcelExport}> Export Excel-File</button>
-
                 <SortingComponent entries={entries} setEntries={setEntries} />
-
                 <BlogList>
                     {entries.slice().reverse().map((entry) => {
                         return <EntryComponent key={entry.id} blogEntry={entry} />;
