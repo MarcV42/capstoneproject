@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import AppHeader from "../../components/AppHeader.tsx";
 import styled from "styled-components";
 import MinusSvg from "../../assets/minus-circle.svg";
+import PlusSvg from "../../assets/plus-circle.svg";
 
 const EditForm = styled.form`
   display: flex;
@@ -117,6 +118,14 @@ export default function EditBlogEntry() {
         }
     };
 
+    const insertTag = (index: number) => {
+        if (blogentry && blogentry.hashtags) {
+            const newTags = [...blogentry.hashtags];
+            newTags.splice(index + 1, 0, ""); // Füge ein leeres Tag nach dem aktuellen Index hinzu
+            setBlogentry({ ...blogentry, hashtags: newTags });
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (blogentry) {
@@ -151,51 +160,61 @@ export default function EditBlogEntry() {
 
     return (
         <>
-            <AppHeader headerText={"Edit Blog"}/>
+            <AppHeader headerText={"Edit Blog"} />
             <EditForm onSubmit={handleSubmit}>
                 {blogentry && (
                     <>
                         <TitleInput
                             type="text"
-                            value={blogentry.title || ''}
+                            value={blogentry.title || ""}
                             onChange={(e) => {
-                                setBlogentry({...blogentry, title: e.target.value});
-                            }}/>
-                        <ContentTextarea rows={23}
-                                         value={blogentry.content}
-                                         onChange={(e) => {
-                                             setBlogentry({...blogentry, content: e.target.value});
-                                         }}/>
+                                setBlogentry({ ...blogentry, title: e.target.value });
+                            }}
+                        />
+                        <ContentTextarea
+                            rows={23}
+                            value={blogentry.content}
+                            onChange={(e) => {
+                                setBlogentry({ ...blogentry, content: e.target.value });
+                            }}
+                        />
                         <TagsTitle>Tags:</TagsTitle>
                         <TagContainer>
-                        {blogentry.hashtags && blogentry.hashtags.map((tag, index) => (
-                            <SingleTag key={index}>
-                                <TagLabel htmlFor={"tag" + (index + 1)}>{index + 1}. </TagLabel>
-                                <TagInput
-                                    maxLength={20}
-                                    type="text"
-                                    id={"tag" + (index + 1)}
-                                    value={tag}
-                                    onChange={((event) => {
-                                        const newTags = [...blogentry.hashtags];
-                                        newTags[index] = event.target.value;
-                                        setBlogentry({...blogentry, hashtags: newTags});
-                                    })}
-                                />
-
-
-                                <TagButton type={"button"} onClick={() => deleteTag(index)}>
-                                    <ButtonImage src={MinusSvg} alt="Reduce Icon"/>
-                                </TagButton>
-                            </SingleTag>
-                        ))}
-                    </TagContainer>
-                    </>)}
-<ButtonContainer>
-                <Button type="button" onClick={() => navigateTo("/")}>Discard</Button>
-                <Button type="submit" onClick={handleSubmit}> Save</Button>
-            </ButtonContainer>
+                            {blogentry.hashtags &&
+                                blogentry.hashtags.map((tag, index) => (
+                                    <SingleTag key={index}>
+                                        <TagLabel htmlFor={"tag" + (index + 1)}>{index + 1}. </TagLabel>
+                                        <TagInput
+                                            maxLength={20}
+                                            type="text"
+                                            id={"tag" + (index + 1)}
+                                            value={tag}
+                                            onChange={(event) => {
+                                                const newTags = [...blogentry.hashtags];
+                                                newTags[index] = event.target.value;
+                                                setBlogentry({ ...blogentry, hashtags: newTags });
+                                            }}
+                                        />
+                                        <TagButton type={"button"} onClick={() => deleteTag(index)}>
+                                            <ButtonImage src={MinusSvg} alt="Reduce Icon" />
+                                        </TagButton>
+                                        <TagButton type={"button"} onClick={() => insertTag(index)}> {/* Plus-Schaltfläche hinzugefügt */}
+                                            <ButtonImage src={PlusSvg} alt="Add Icon" />
+                                        </TagButton>
+                                    </SingleTag>
+                                ))}
+                        </TagContainer>
+                    </>
+                )}
+                <ButtonContainer>
+                    <Button type="button" onClick={() => navigateTo("/")}>
+                        Discard
+                    </Button>
+                    <Button type="submit" onClick={handleSubmit}>
+                        Save
+                    </Button>
+                </ButtonContainer>
             </EditForm>
         </>
-    )
+    );
 }

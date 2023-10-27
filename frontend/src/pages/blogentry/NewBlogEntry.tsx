@@ -1,12 +1,11 @@
-import {useState} from "react";
+import { useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import {NewBlog, Tag} from "./model/model.ts";
+import { useNavigate } from "react-router-dom";
+import { NewBlog, Tag } from "./model/model.ts";
 import styled from "styled-components";
 import AppHeader from "../../components/AppHeader.tsx";
-import AddSvg from "../../assets/plus-circle.svg"
+import AddSvg from "../../assets/plus-circle.svg";
 import MinusSvg from "../../assets/minus-circle.svg";
-
 
 const Main = styled.main`
   display: flex;
@@ -79,6 +78,7 @@ const TagLabel = styled.label`
 `;
 
 const TagInput = styled.input`
+  width: 70%; // Breite des Hashtag-Eingabefelds auf 70 %
   font-size: 1.2em;
 `;
 
@@ -107,14 +107,12 @@ const SubmitButton = styled.button`
   font-weight: 500;
   cursor: grab;
   width: 100%;
-
 `;
 
 export default function NewBlogEntry() {
-
-    const [title, setTitle,] = useState("")
-    const [text, setText,] = useState("")
-    const [tags, setTags,] = useState<Tag[]>([{name: ""}])
+    const [title, setTitle] = useState("");
+    const [text, setText] = useState("");
+    const [tags, setTags] = useState<Tag[]>([{ name: "" }]);
 
     const changeTagName = (index: number, name: string) => {
         const newTags = [...tags];
@@ -122,30 +120,26 @@ export default function NewBlogEntry() {
         setTags(newTags);
     };
 
-    const navigateTo = useNavigate()
+    const navigateTo = useNavigate();
 
     function handleOnSubmit() {
-        const filteredTags = tags.filter(tag => tag.name !== "");
-        const mytags = filteredTags.map((item) => item.name)
+        const filteredTags = tags.filter((tag) => tag.name !== "");
+        const mytags = filteredTags.map((item) => item.name);
 
-        const newBlogEntry: NewBlog =
-            {
-                title: title,
-                content: text,
-                hashtags: mytags,
-            };
+        const newBlogEntry: NewBlog = {
+            title: title,
+            content: text,
+            hashtags: mytags,
+        };
+
         axios
             .post("/api/blogs", newBlogEntry)
-            .then(() => {
-
-                //   console.log("Erfolgreich gespeichert:", response.data);
-            })
             .then(() => navigateTo("/"))
             .catch((error) => {
-                // Fehler verarbeiten
                 console.error("Fehler beim Speichern:", error);
             });
     }
+
     const removeTag = (index: number) => {
         if (tags.length > 1) {
             const newTags = [...tags];
@@ -156,42 +150,50 @@ export default function NewBlogEntry() {
 
     const insertTag = (index: number) => {
         const newTags = [...tags];
-        newTags.splice(index + 1, 0, { name: '' }); // Fügt ein leeres Tag nach dem aktuellen Index hinzu
+        newTags.splice(index + 1, 0, { name: "" }); // Fügt ein leeres Tag nach dem aktuellen Index hinzu
         setTags(newTags);
     };
 
+    return (
+        <>
+            <AppHeader headerText="New Blog" />
+            <Main>
+                <TitleInput
+                    type="text"
+                    placeholder="What's on my mind right now"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                ></TitleInput>
+                <ContentTextarea
+                    rows={15}
+                    placeholder={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr."}
+                    value={text}
+                    onChange={(event) => setText(event.target.value)}
+                ></ContentTextarea>
+                <TagsTitle>Enter Hashtags:</TagsTitle>
+                <TagContainer>
+                    {tags &&
+                        tags.map((tag, index) => (
+                            <SingleTag key={index}>
+                                <TagLabel htmlFor={"tag" + (index + 1)}>{index + 1}. </TagLabel>
+                                <TagInput
+                                    id={"tag" + (index + 1)}
+                                    value={tag.name}
+                                    placeholder={"#HashTag"}
+                                    onChange={(event) => changeTagName(index, event.target.value)}
+                                />
 
-    return <>
-        <AppHeader headerText="New Blog"/>
-        <Main>
-            <TitleInput type="text" placeholder="What's on my mind right now" value={title}
-                        onChange={(event) => setTitle(event.target.value)}></TitleInput>
-            <ContentTextarea rows={15} placeholder={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr."}
-                             value={text}
-                             onChange={(event) => setText(event.target.value)}></ContentTextarea>
-            <TagsTitle>Enter Hashtags:</TagsTitle>
-            <TagContainer>
-                {tags && tags.map((tag, index) => (
-                    <SingleTag key={index}>
-                        <TagLabel htmlFor={"tag" + (index + 1)}>{index + 1}. </TagLabel>
-                        <TagInput
-                            id={"tag" + (index + 1)}
-                            value={tag.name}
-                            placeholder={"#HashTag"}
-                            onChange={(event) => changeTagName(index, event.target.value)}
-                        />
-
-                        <TagButton type="button" onClick={() => removeTag(index)}>
-                            <ButtonImage src={MinusSvg} alt="Minus Icon" />
-                        </TagButton>
-                        <TagButton type="button" onClick={() => insertTag(index)}>
-                            <ButtonImage src={AddSvg} alt="Plus Icon" />
-                        </TagButton>
-                    </SingleTag>
-                ))}
-
-            </TagContainer>
-            <SubmitButton onClick={handleOnSubmit}>Submit</SubmitButton>
-        </Main>
-    </>
+                                <TagButton type="button" onClick={() => removeTag(index)}>
+                                    <ButtonImage src={MinusSvg} alt="Minus Icon" />
+                                </TagButton>
+                                <TagButton type="button" onClick={() => insertTag(index)}>
+                                    <ButtonImage src={AddSvg} alt="Plus Icon" />
+                                </TagButton>
+                            </SingleTag>
+                        ))}
+                </TagContainer>
+                <SubmitButton onClick={handleOnSubmit}>Submit</SubmitButton>
+            </Main>
+        </>
+    );
 }
