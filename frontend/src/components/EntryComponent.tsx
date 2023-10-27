@@ -104,7 +104,7 @@ export default function EntryComponent(props: props) {
     return <>
         <Container>
             <Title>{props.blogEntry.title}</Title>
-            <p> {props.blogEntry.author} </p>
+            <p>Author:  {props.blogEntry.author} </p>
             <EntryDate>{date + " " + time}</EntryDate>
             <BookmarkButton type="button" onClick={handleClickBookmark}>
                 <img src={BookmarkSvg}

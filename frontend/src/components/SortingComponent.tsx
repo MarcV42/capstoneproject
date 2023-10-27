@@ -60,8 +60,8 @@ export default function SortingComponent(props: props) {
             <SortIcon src={SortSvg} alt="Sort Icon"/>Sort by
         </SortLabel>
         <SortSelect id="sort-by" onChange={handleChangeSortBy}>
-            <SortOption value="oldest to newest">oldest to newest</SortOption>
             <SortOption value="newest to oldest">newest to oldest</SortOption>
+            <SortOption value="oldest to newest">oldest to newest</SortOption>
         </SortSelect>
     </Container>
 }

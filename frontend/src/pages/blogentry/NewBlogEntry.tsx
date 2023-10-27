@@ -61,7 +61,6 @@ const TagContainer = styled.div`
   cursor: text;
   transition: border-color 0.25s;
   position: relative;
-\`                                               
 `;
 
 const SingleTag = styled.div`
@@ -93,7 +92,7 @@ const TagButton = styled.button`
 `;
 
 const ButtonImage = styled.img`
-width: 2.4em;
+  width: 2.4em;
   position: absolute;
   top: 0.2em;
   left: 0;
@@ -108,7 +107,7 @@ const SubmitButton = styled.button`
   font-weight: 500;
   cursor: grab;
   width: 100%;
-  
+
 `;
 
 export default function NewBlogEntry() {
@@ -116,7 +115,6 @@ export default function NewBlogEntry() {
     const [title, setTitle,] = useState("")
     const [text, setText,] = useState("")
     const [tags, setTags,] = useState<Tag[]>([{name: ""}])
-
 
     const changeTagName = (index: number, name: string) => {
         const newTags = [...tags];
@@ -140,7 +138,7 @@ export default function NewBlogEntry() {
             .post("/api/blogs", newBlogEntry)
             .then(() => {
 
-             //   console.log("Erfolgreich gespeichert:", response.data);
+                //   console.log("Erfolgreich gespeichert:", response.data);
             })
             .then(() => navigateTo("/"))
             .catch((error) => {
