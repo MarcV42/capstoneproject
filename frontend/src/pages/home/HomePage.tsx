@@ -127,7 +127,6 @@ export default function HomePage() {
         navigateTo('/');
     }
 
-    // function ExcelExport(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
     const ExcelExport = () => {
         // Erstelle ein neues Excel-Arbeitsbuch
         const workbook = new ExcelJS.Workbook();
