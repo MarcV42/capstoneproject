@@ -127,8 +127,8 @@ export default function EntryComponent(props: props) {
         }
     }
 
-    const originalString = props.blogEntry.content;
-    const truncatedString = truncateString(originalString, 100);
+    const mainTextfieldText = props.blogEntry.content;
+    const truncatedString = truncateString(mainTextfieldText, 122);
 
     return (
         <Container>
