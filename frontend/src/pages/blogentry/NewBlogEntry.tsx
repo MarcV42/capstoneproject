@@ -154,6 +154,7 @@ export default function NewBlogEntry() {
         setTags(newTags);
     };
 
+
     return (
         <>
             <AppHeader headerText="New Blog" />
