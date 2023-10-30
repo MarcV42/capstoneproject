@@ -1,7 +1,7 @@
 import {BlogEntry} from "../model/BlogEntryModel.tsx";
 import {ChangeEvent} from "react";
 import styled from "styled-components";
-import SortSvg from "../assets/chevron-up-down.svg";
+
 
 type props =
     {
@@ -22,16 +22,6 @@ const Container = styled.div`
   position: relative;
 `;
 
-const SortIcon = styled.img`
-  width: 1.8em;
-  position: absolute;
-  left: 2em;
-  top: 0.2em;
-`;
-
-const SortLabel = styled.label`
-  font-size: 1.4em;
-`;
 
 const SortSelect = styled.select`
   font-size: 1.4em;
@@ -56,9 +46,6 @@ export default function SortingComponent(props: props) {
     }
 
     return <Container>
-        <SortLabel htmlFor="sort-by">
-            <SortIcon src={SortSvg} alt="Sort Icon"/>Sort by
-        </SortLabel>
         <SortSelect id="sort-by" onChange={handleChangeSortBy}>
             <SortOption value="newest to oldest">newest to oldest</SortOption>
             <SortOption value="oldest to newest">oldest to newest</SortOption>
