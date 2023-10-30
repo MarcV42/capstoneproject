@@ -7,6 +7,7 @@ import styled from "styled-components";
 import MinusSvg from "../../assets/minus-circle.svg";
 import PlusSvg from "../../assets/plus-circle.svg";
 
+
 const EditForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -84,15 +85,12 @@ const Button = styled.button`
   font-size: 1.2em;
 `;
 
-
-export default function EditBlogEntry() {
-
+export default function EditBlogentry(){
     const navigateTo = useNavigate()
     const {id} = useParams();
     const [blogentry, setBlogentry] = useState<BlogEntry>()
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -107,7 +105,6 @@ export default function EditBlogEntry() {
         };
         fetchBlog().then();
     }, [id]);
-
 
 
     const deleteTag = (index: number) => {

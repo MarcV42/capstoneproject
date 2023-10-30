@@ -10,8 +10,6 @@ import AddIcon from "../../assets/plus-circle.svg";
 import { saveAs } from 'file-saver';
 import ExcelJS from 'exceljs';
 
-
-
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -84,6 +82,7 @@ export default function HomePage() {
             window.location.host === 'localhost:5173'
                 ? 'http://localhost:8080'
                 : window.location.origin;
+
 
         // Assuming this is where you handle the login process
         window.open(host + '/oauth2/authorization/github');
@@ -176,3 +175,4 @@ export default function HomePage() {
         </>
     );
 }
+
